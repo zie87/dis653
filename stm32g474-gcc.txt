@@ -1,0 +1,50 @@
+[constants]
+arch = 'arm-none-eabi'
+
+[binaries]
+c           = arch + '-gcc'
+cpp         = arch + '-g++'
+ld          = arch + '-ld'
+ar          = arch + '-ar'
+as          = arch + '-as'
+size        = arch + '-size'
+objdump     = arch + '-objdump'
+objcopy     = arch + '-objcopy'
+readelf     = arch + '-readelf'
+strip       = arch + '-strip'
+
+[built-in options]
+b_staticpic = 'false'
+default_library = 'static'
+
+c_args = [
+    '-mcpu=cortex-m4',
+    '-DSTM32G474xx',
+    '-ffunction-sections',
+    '-fdata-sections',
+    '-fstack-usage',
+    '--specs=nano.specs',
+    '-mfpu=fpv4-sp-d16',
+    '-mfloat-abi=hard',
+    '-mthumb',
+    ]
+
+c_link_args = [
+    '-mcpu=cortex-m4', 
+    '--specs=nosys.specs',
+    '-Wl,--gc-sections',
+    '-static',
+    '--specs=nano.specs',
+    '-mfpu=fpv4-sp-d16',
+    '-mfloat-abi=hard', 
+    '-mthumb',
+    '-Wl,--no-warn-rwx-segment',
+    '-Wl,--print-memory-usage',
+    ]
+
+
+[host_machine]
+system     = 'stm32g474re'
+cpu_family = 'arm'
+cpu        = 'cortex-m4'
+endian     = 'little'
